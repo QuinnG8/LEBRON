@@ -1,53 +1,57 @@
-CREATE TABLE Players (
+-- SET FOREIGN_KEY_CHECKS = 0; 
+-- DROP TABLE IF EXISTS PlayerPositions;
+-- DROP TABLE IF EXISTS SeasonPlayers;
+-- DROP TABLE IF EXISTS Players;
+-- DROP TABLE IF EXISTS Teams;
+-- DROP TABLE IF EXISTS Conferences;
+-- DROP TABLE IF EXISTS Positions;
+-- DROP TABLE IF EXISTS Seasons;
+-- SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE OR REPLACE TABLE Players (
     playerID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     age INT NOT NULL,
     jerseyNumber INT NOT NULL
 );
 
-
-CREATE TABLE Teams (
-    teamID INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    conferenceID INT,
-    FOREIGN KEY (conferenceID) REFERENCES Conferences(conferenceID)
-);
-
-
-CREATE TABLE Conferences (
+CREATE OR REPLACE TABLE Conferences (
     conferenceID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
+CREATE OR REPLACE TABLE Teams (
+    teamID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    conferenceID INT,
+    FOREIGN KEY (conferenceID) REFERENCES Conferences(conferenceID) ON DELETE SET NULL
+);
 
-CREATE TABLE Positions (
+CREATE OR REPLACE TABLE Positions (
     positionID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
-
-CREATE TABLE PlayerPositions (
+CREATE OR REPLACE TABLE PlayerPositions (
     playerPositionID INT AUTO_INCREMENT PRIMARY KEY,
     playerID INT NOT NULL,
     positionID INT NOT NULL,
-    FOREIGN KEY (playerID) REFERENCES Players(playerID),
-    FOREIGN KEY (positionID) REFERENCES Positions(positionID)
+    FOREIGN KEY (playerID) REFERENCES Players(playerID) ON DELETE CASCADE,
+    FOREIGN KEY (positionID) REFERENCES Positions(positionID) ON DELETE CASCADE
 );
 
 
-CREATE TABLE Seasons (
+CREATE OR REPLACE TABLE Seasons (
     seasonID INT AUTO_INCREMENT PRIMARY KEY,
     year INT NOT NULL
 );
 
-CREATE TABLE SeasonPlayers (
+CREATE OR REPLACE TABLE SeasonPlayers (
     seasonPlayerID INT AUTO_INCREMENT PRIMARY KEY,
     playerID INT NOT NULL,
     seasonID INT NOT NULL,
     teamID INT NOT NULL,
-    FOREIGN KEY (playerID) REFERENCES Players(playerID),
-    FOREIGN KEY (seasonID) REFERENCES Seasons(seasonID),
-    FOREIGN KEY (teamID) REFERENCES Teams(teamID)
+    FOREIGN KEY (playerID) REFERENCES Players(playerID) ON DELETE CASCADE
 );
 
 INSERT INTO Players (name, age, jerseyNumber) VALUES
@@ -57,6 +61,9 @@ INSERT INTO Players (name, age, jerseyNumber) VALUES
 ('Giannis Antetokounmpo', 29, 34),
 ('Luka Dončić', 24, 77);
 
+INSERT INTO Conferences (name) VALUES
+('Western Conference'),
+('Eastern Conference');
 
 INSERT INTO Teams (name, conferenceID) VALUES
 ('Los Angeles Lakers', 1),
@@ -64,12 +71,6 @@ INSERT INTO Teams (name, conferenceID) VALUES
 ('Brooklyn Nets', 2),
 ('Milwaukee Bucks', 2),
 ('Dallas Mavericks', 1);
-
-
-INSERT INTO Conferences (name) VALUES
-('Western Conference'),
-('Eastern Conference');
-
 
 INSERT INTO Positions (name) VALUES
 ('Point Guard'),
