@@ -4,13 +4,13 @@
 -- Quinn Glenn
 -- Tieg Zaharia
 
--- Disable autocommit so that we run the full DDL in a single transaction, and that 
--- we rollback if anything goes wrong. 
-SET AUTOCOMMIT = 0;
-
 -- Disable foreign key checks temporarily while we import the schema and data, to avoid
 -- foreign key dependencies.
 SET FOREIGN_KEY_CHECKS=0;
+
+-- Disable autocommit so that we run the full DDL in a single transaction, and that 
+-- we rollback if anything goes wrong. 
+SET AUTOCOMMIT = 0;
 
 -- Players table
 CREATE OR REPLACE TABLE Players (
@@ -113,5 +113,4 @@ INSERT INTO SeasonPlayers (playerID, seasonID, teamID) VALUES
 (5, 1, 5);  -- Luka Dončić played for Mavericks in 2023
 
 SET FOREIGN_KEY_CHECKS=1;
-
 COMMIT;
