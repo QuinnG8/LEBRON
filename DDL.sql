@@ -55,13 +55,15 @@ CREATE OR REPLACE TABLE Seasons (
     year INT NOT NULL
 );
 
--- SeasonPlayers table
-CREATE OR REPLACE TABLE SeasonPlayers (
-    seasonPlayerID INT AUTO_INCREMENT PRIMARY KEY,
+-- SeasonTeamPlayers table
+CREATE OR REPLACE TABLE SeasonTeamPlayers (
+    seasonTeamPlayerID INT AUTO_INCREMENT PRIMARY KEY,
     playerID INT NOT NULL,
     seasonID INT NOT NULL,
     teamID INT NOT NULL,
-    FOREIGN KEY (playerID) REFERENCES Players(playerID) ON DELETE CASCADE
+    FOREIGN KEY (playerID) REFERENCES Players(playerID) ON DELETE CASCADE,
+    FOREIGN KEY (seasonID) REFERENCES Seasons(seasonID) ON DELETE CASCADE,
+    FOREIGN KEY (teamID) REFERENCES Teams(teamID) ON DELETE CASCADE
 );
 
 -- Example Data
@@ -105,7 +107,7 @@ INSERT INTO Seasons (year) VALUES
 (2020),
 (2019);
 
-INSERT INTO SeasonPlayers (playerID, seasonID, teamID) VALUES
+INSERT INTO SeasonTeamPlayers (playerID, seasonID, teamID) VALUES
 (1, 1, 1),  -- LeBron James played for Lakers in 2023
 (2, 1, 2),  -- Stephen Curry played for Warriors in 2023
 (3, 1, 3),  -- Kevin Durant played for Nets in 2023
