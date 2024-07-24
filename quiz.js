@@ -59,5 +59,5 @@ document.getElementById('new-quiz').addEventListener('click', function() {
 });
 
 document.getElementById('back-to-main').addEventListener('click', function() {
-    window.location.href = 'LEBRON.html';
+    window.location.href = '/';
 });

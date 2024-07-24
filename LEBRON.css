@@ -27,10 +27,12 @@ h1 {
 ul {
     list-style: none;
     padding: 0;
+    text-align: center;
 }
 
 li {
     margin: 20px 0;
+    line-height: 2em;
 }
 
 a.button, button {
@@ -72,3 +74,9 @@ td.correct {
     background-color: #28a745;
     color: #fff;
 }
+
+/* Form controls */
+
+#edit-form { display: none; }
+#add-form { display: none; }
+#edit-form.visible, #add-form.visible { display: block; }

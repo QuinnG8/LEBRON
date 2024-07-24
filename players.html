@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Quiz Game - Generate Quiz</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="LEBRON.css" />
+    <script src="form_controls.js" defer></script>
+    <script src="players.js" defer></script>
+    <style>
+      #edit-player { display: none; }
+      #add-player { display: none; }
+      #edit-player.visible, #add-player.visible { display: block; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>LEBRON - The NBA Player Guessing Game</h1>
+    </header>
+    <main>
+      <h2>Players</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Jersey Number</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LeBron James</td>
+            <td>37</td>
+            <td>6</td>
+            <th>Small Forward</th>
+            <th>Lakers (2023)</th>
+            <td><a href="" class="button edit-button">edit</a></td>
+            <td><a href="" class="button delete-button">delete</a></td>
+          </tr>
+          <tr>
+            <td>Stephen Curry</td>
+            <td>34</td>
+            <td>30</td>
+            <th>Point Guard</th>
+            <th>Warriors (2023)</th>
+            <td><a href="" class="button edit-button">edit</a></td>
+            <td><a href="" class="button delete-button">delete</a></td>
+          </tr>
+          <tr>
+            <td>Kevin Durant</td>
+            <td>33</td>
+            <td>7</td>
+            <th>Small Forward</th>
+            <th>Nets (2023)</th>
+            <td><a href="" class="button edit-button">edit</a></td>
+            <td><a href="" class="button delete-button">delete</a></td>
+          </tr>
+          <tr>
+            <td>Giannis Antetokounmpo</td>
+            <td>29</td>
+            <td>34</td>
+            <th>Center</th>
+            <th>Bucks (2023)</th>
+            <td><a href="" class="button edit-button">edit</a></td>
+            <td><a href="" class="button delete-button">delete</a></td>
+          </tr>
+          <tr>
+            <td>Luka Dončić</td>
+            <td>24</td>
+            <td>77</td>
+            <th>Point Guard</th>
+            <th>Mavericks (2023)</th>
+            <td><a href="" class="button edit-button">edit</a></td>
+            <td><a href="" class="button delete-button">delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <form id="edit-form">
+        <h3>Edit Player</h3>
+        <fieldset>
+          <input type="text" name="name" value="" />
+          <input type="text" name="age" value="" />
+          <input type="text" name="jerseyNumber" value="" />
+          <input type="submit" value="Update" />
+        </fieldset>
+      </form>
+      <form id="add-form">
+        <h3>Add Player</h3>
+        <fieldset>
+          <input type="text" name="name" value="" />
+          <input type="text" name="age" value="" />
+          <input type="text" name="jerseyNumber" value="" />
+          <input type="submit" value="Create" />
+        </fieldset>
+      </form>
+      <button id="add-button">Add Player</button>
+      <a class="button" href="/">Back to Main Screen</a>
+    </main>
+  </body>
+</html>
