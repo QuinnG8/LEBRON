@@ -27,15 +27,13 @@ h1 {
 ul {
     list-style: none;
     padding: 0;
-    text-align: center;
 }
 
 li {
     margin: 20px 0;
-    line-height: 2em;
 }
 
-a.button, button {
+a, button {
     text-decoration: none;
     color: #fff;
     background-color: #007bff;
@@ -47,7 +45,7 @@ a.button, button {
     cursor: pointer;
 }
 
-a.button:hover, button:hover {
+a:hover, button:hover {
     background-color: #0056b3;
 }
 
@@ -73,6 +71,63 @@ th, td {
 td.correct {
     background-color: #28a745;
     color: #fff;
+}
+
+/* Styles for Form Pages */
+.form-page {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-page .form-group {
+    margin-bottom: 15px;
+}
+
+.form-page label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-page input[type="text"],
+.form-page input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-page button,
+.form-page a.button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.form-page button:hover,
+.form-page a.button:hover {
+    background-color: #0056b3;
+}
+
+.form-page a.cancel {
+    background-color: #6c757d;
+}
+
+.form-page a.cancel:hover {
+    background-color: #5a6268;
 }
 
 /* Form controls */
