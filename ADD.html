@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add NBA Player</title>
+    <link rel="stylesheet" href="LEBRON.css">
+</head>
+<body>
+    <header>
+        <h1>Add NBA Player</h1>
+    </header>
+    <main class="form-page">
+        <form id="addPlayerForm" action="add_player.php" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="jerseyNumber">Jersey Number:</label>
+                <input type="number" id="jerseyNumber" name="jerseyNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="team">Team:</label>
+                <input type="text" id="team" name="team" required>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input type="text" id="position" name="position" required>
+            </div>
+
+            <div class="form-group">
+                <label for="conference">Conference:</label>
+                <input type="text" id="conference" name="conference" required>
+            </div>
+
+            <button type="submit" class="button">Add Player</button>
+            <a href="LEBRON.html" class="button cancel">Cancel</a>
+        </form>
+    </main>
+</body>
+</html>

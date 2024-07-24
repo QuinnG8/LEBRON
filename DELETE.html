@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete NBA Player</title>
+    <link rel="stylesheet" href="LEBRON.css">
+</head>
+<body>
+    <header>
+        <h1>Delete NBA Player</h1>
+    </header>
+    <main class="form-page">
+        <form id="deletePlayerForm" action="delete_player.php" method="POST">
+            <div class="form-group">
+                <label for="name">Player Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <button type="submit" class="button">Delete Player</button>
+            <a href="LEBRON.html" class="button cancel">Cancel</a>
+        </form>
+    </main>
+</body>
+</html>
