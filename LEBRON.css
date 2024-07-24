@@ -27,6 +27,10 @@ h1 {
 ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
 }
 
 li {
@@ -37,10 +41,10 @@ a, button {
     text-decoration: none;
     color: #fff;
     background-color: #007bff;
-    padding: 10px 20px;
+    padding: 15px 25px; /* Increased padding for larger buttons */
     border: none;
     border-radius: 5px;
-    font-size: 1.2em;
+    font-size: 1.4em; /* Increased font size */
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
