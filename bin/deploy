@@ -1,0 +1,7 @@
+#!/bin/bash
+# 
+# Currently this script just copies all the web-related files up to OSU's
+# engr server. Change username if you want to upload to a different user's folder.
+#
+
+scp *.{css,html,js} zahariat@access.engr.oregonstate.edu:public_html/cs340
