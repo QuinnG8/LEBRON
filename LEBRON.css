@@ -37,7 +37,7 @@ li {
     margin: 10px 0;
 }
 
-a, button {
+a.button, button {
     text-decoration: none;
     color: #fff;
     background-color: #007bff;
@@ -50,8 +50,12 @@ a, button {
     display: inline-block;
 }
 
+a { 
+    color: #eee;
+    text-decoration: none;
+}
 
-a:hover, button:hover {
+a.button:hover, button:hover {
     background-color: #0056b3;
 }
 
