@@ -55,60 +55,60 @@ SELECT * FROM Seasons;
 
 -- Get a specific player by ID
 SELECT * FROM Players
-WHERE playerID = :playerIDInput;
+  WHERE playerID = :playerIDInput;
 
 -- Get all players in a specific team for a season
 SELECT p.name, p.age, p.jerseyNumber, t.name AS teamName, s.year
-FROM Players p
-JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
-JOIN Teams t ON stp.teamID = t.teamID
-JOIN Seasons s ON stp.seasonID = s.seasonID
-WHERE t.teamID = :teamIDInput AND s.year = :yearInput;
+  FROM Players p
+  JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
+  JOIN Teams t ON stp.teamID = t.teamID
+  JOIN Seasons s ON stp.seasonID = s.seasonID
+  WHERE t.teamID = :teamIDInput AND s.year = :yearInput;
 
 -- UPDATE queries
 
 -- Update player information
 UPDATE Players
-SET name = :nameInput, age = :ageInput, jerseyNumber = :jerseyNumberInput
-WHERE playerID = :playerIDInput;
+  SET name = :nameInput, age = :ageInput, jerseyNumber = :jerseyNumberInput
+  WHERE playerID = :playerIDInput;
 
 -- Update team information
 UPDATE Teams
-SET name = :teamNameInput, conferenceID = :conferenceIDInput
-WHERE teamID = :teamIDInput;
+  SET name = :teamNameInput, conferenceID = :conferenceIDInput
+  WHERE teamID = :teamIDInput;
 
 -- Update conference information
 UPDATE Conferences
-SET name = :conferenceNameInput
-WHERE conferenceID = :conferenceIDInput;
+  SET name = :conferenceNameInput
+  WHERE conferenceID = :conferenceIDInput;
 
 -- Update position information
 UPDATE Positions
-SET name = :positionNameInput
-WHERE positionID = :positionIDInput;
+  SET name = :positionNameInput
+  WHERE positionID = :positionIDInput;
 
 -- DELETE queries
 
 -- Delete a player
 DELETE FROM Players
-WHERE playerID = :playerIDInput;
+  WHERE playerID = :playerIDInput;
 
 -- Delete a team
 DELETE FROM Teams
-WHERE teamID = :teamIDInput;
+  WHERE teamID = :teamIDInput;
 
 -- Delete a conference
 DELETE FROM Conferences
-WHERE conferenceID = :conferenceIDInput;
+  WHERE conferenceID = :conferenceIDInput;
 
 -- Delete a position
 DELETE FROM Positions
-WHERE positionID = :positionIDInput;
+  WHERE positionID = :positionIDInput;
 
 -- Delete a player's position assignment
 DELETE FROM PlayerPositions
-WHERE playerPositionID = :playerPositionIDInput;
+  WHERE playerPositionID = :playerPositionIDInput;
 
 -- Delete a player's season team assignment
 DELETE FROM SeasonTeamPlayers
-WHERE seasonTeamPlayerID = :seasonTeamPlayerIDInput;
+  WHERE seasonTeamPlayerID = :seasonTeamPlayerIDInput;
