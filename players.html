@@ -78,7 +78,7 @@
           </tr>
         </tbody>
       </table>
-      <form id="edit-form">
+      <form id="edit-form" method="post">
         <h3>Edit Player</h3>
         <fieldset>
           <input type="text" name="name" value="" />
@@ -87,13 +87,22 @@
           <input type="submit" value="Update" />
         </fieldset>
       </form>
-      <form id="add-form">
+      <form id="add-form" method="post">
         <h3>Add Player</h3>
         <fieldset>
           <input type="text" name="name" value="" />
           <input type="text" name="age" value="" />
           <input type="text" name="jerseyNumber" value="" />
           <input type="submit" value="Create" />
+        </fieldset>
+      </form>
+      <form id="delete-form" method="delete">
+        <h3>Delete Player?</h3>
+        <fieldset>
+          <p><strong>playerID</strong>: 1</p>
+          <p><strong>Name</strong>: Lebron James</p>
+          <input type="hidden" name="playerID" value="1" />
+          <input type="submit" value="Yes, delete." />
         </fieldset>
       </form>
       <button id="add-button">Add Player</button>

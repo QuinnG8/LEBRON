@@ -36,18 +36,27 @@
           </tr>
         </tbody>
       </table>
-      <form id="edit-form">
+      <form id="edit-form" method="post">
         <h3>Edit Conference</h3>
         <fieldset>
           <input type="text" name="name" value="" />
           <input type="submit" value="Update" />
         </fieldset>
       </form>
-      <form id="add-form">
+      <form id="add-form" method="post">
         <h3>Add Conference</h3>
         <fieldset>
           <input type="text" name="name" value="" />
           <input type="submit" value="Create" />
+        </fieldset>
+      </form>
+      <form id="delete-form" method="delete">
+        <h3>Delete Conference?</h3>
+        <fieldset>
+          <p><strong>conferenceID</strong>: 1</p>
+          <p><strong>Name</strong>: Western Conference</p>
+          <input type="hidden" name="conferenceID" value="1" />
+          <input type="submit" value="Yes, delete." />
         </fieldset>
       </form>
       <button id="add-button">Add a Conference</button>

@@ -75,7 +75,7 @@
           </tr>
         </tbody>
       </table>
-      <form id="edit-form">
+      <form id="edit-form" method="post">
         <h3>Edit Season Player</h3>
         <fieldset>
           <label for="seasonID">Season</label>
@@ -93,7 +93,7 @@
           <input type="submit" value="Update" />
         </fieldset>
       </form>
-      <form id="add-form">
+      <form id="add-form" method="post">
         <h3>Add Season Player</h3>
         <fieldset>
           <label for="seasonID">Season</label>
@@ -109,6 +109,17 @@
             <option value="1">LeBron James</option>
           </select>
           <input type="submit" value="Create" />
+        </fieldset>
+      </form>
+      <form id="delete-form" method="delete">
+        <h3>Delete Season Player?</h3>
+        <fieldset>
+          <p><strong>seasonTeamPlayer</strong>: 1</p>
+          <p><strong>Player Name</strong>: Lebron James</p>
+          <p><strong>Season Year</strong>: 2023</p>
+          <p><strong>Team Name</strong>: Los Angeles Lakers</p>
+          <input type="hidden" name="seasonTeamPlayerID" value="" />
+          <input type="submit" value="Yes, delete." />
         </fieldset>
       </form>
       <button id="add-button">Add Player</button>

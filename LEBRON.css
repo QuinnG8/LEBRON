@@ -138,6 +138,5 @@ td.correct {
 
 /* Form controls */
 
-#edit-form { display: none; }
-#add-form { display: none; }
-#edit-form.visible, #add-form.visible { display: block; }
+#edit-form, #add-form, #delete-form { display: none; }
+#edit-form.visible, #add-form.visible, #delete-form.visible { display: block; }

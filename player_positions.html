@@ -69,7 +69,7 @@
           </tr>
         </tbody>
       </table>
-      <form id="edit-form">
+      <form id="edit-form" method="post">
         <h3>Edit Player Position</h3>
         <fieldset>
           <label for="playerID">Player</label>
@@ -87,7 +87,7 @@
           <input type="submit" value="Update" />
         </fieldset>
       </form>
-      <form id="add-form">
+      <form id="add-form" method="post">
         <h3>Add Player Position</h3>
         <fieldset>
           <label for="playerID">Player</label>
@@ -103,6 +103,16 @@
             <option value="5">Center</option>
           </select>
           <input type="submit" value="Create" />
+        </fieldset>
+      </form>
+      <form id="delete-form" method="delete">
+        <h3>Delete Player Position?</h3>
+        <fieldset>
+          <p><strong>playerPositionID</strong>: 1</p>
+          <p><strong>Player Name</strong>: Lebron James</p>
+          <p><strong>Position Name</strong>: Small Forward</p>
+          <input type="hidden" name="playerPositionID" value="" />
+          <input type="submit" value="Yes, delete." />
         </fieldset>
       </form>
       <button id="add-button">Add Player Position</button>
