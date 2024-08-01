@@ -19,6 +19,7 @@ document.getElementById('guess-form').addEventListener('submit', function(e) {
             const positionCell = document.getElementById(`position${i}`);
             const conferenceCell = document.getElementById(`conference${i}`);
             
+            // Only fill the first empty row
             if (!ageCell.textContent) {
                 ageCell.textContent = correctData.age;
                 numberCell.textContent = correctData.number;
@@ -59,5 +60,6 @@ document.getElementById('new-quiz').addEventListener('click', function() {
 });
 
 document.getElementById('back-to-main').addEventListener('click', function() {
-    window.location.href = '/';
+    window.location.href = 'index.html'; // Adjust if needed
 });
+
