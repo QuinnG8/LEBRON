@@ -16,25 +16,35 @@ VALUES (:nameInput, :ageInput, :jerseyNumberInput);
 INSERT INTO Conferences (name)
 VALUES (:conferenceNameInput);
 
--- Add a new team
+-- Add a new team (updated to match "sub-query that allows the FK to be selected based on human-readable information")
 INSERT INTO Teams (name, conferenceID)
-VALUES (:teamNameInput, :conferenceIDInput);
+VALUES (
+  :teamNameInput,
+  (SELECT conferenceID FROM Conferences WHERE name = :conferenceNameInput)  -- sub-query to get conferenceID
+);
 
 -- Add a new position
 INSERT INTO Positions (name)
 VALUES (:positionNameInput);
 
--- Assign a position to a player
+-- Assign a position to a player (updated to match "sub-query that allows the FK to be selected based on human-readable information")
 INSERT INTO PlayerPositions (playerID, positionID)
-VALUES (:playerIDInput, :positionIDInput);
+VALUES (
+  (SELECT playerID FROM Players WHERE name = :playerNameInput),  -- sub-query to get playerID
+  (SELECT positionID FROM Positions WHERE name = :positionNameInput)  -- sub-query to get positionID
+);
 
 -- Add a new season
 INSERT INTO Seasons (year)
 VALUES (:yearInput);
 
--- Add a player to a team for a season
+-- Add a player to a team for a season (updated to match "sub-query that allows the FK to be selected based on human-readable information")
 INSERT INTO SeasonTeamPlayers (playerID, seasonID, teamID)
-VALUES (:playerIDInput, :seasonIDInput, :teamIDInput);
+VALUES (
+  (SELECT playerID FROM Players WHERE name = :playerNameInput),  -- sub-query to get playerID
+  (SELECT seasonID FROM Seasons WHERE year = :seasonYearInput),  -- sub-query to get seasonID
+  (SELECT teamID FROM Teams WHERE name = :teamNameInput)  -- sub-query to get teamID
+);
 
 -- SELECT queries
 
@@ -67,7 +77,7 @@ SELECT p.name, p.age, p.jerseyNumber, t.name AS teamName, s.year
 
 
 
--- Get players with dynamic filtering (from suggestions)
+-- Get players with dynamic filtering (from suggestions "add a SELECT utilizing a search/filter with a dynamically populated list of")
 SELECT p.playerID, p.name, p.age, p.jerseyNumber, t.name AS teamName, pos.name AS positionName, c.name AS conferenceName
   FROM Players p
   JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
