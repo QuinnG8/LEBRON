@@ -65,6 +65,22 @@ SELECT p.name, p.age, p.jerseyNumber, t.name AS teamName, s.year
   JOIN Seasons s ON stp.seasonID = s.seasonID
   WHERE t.teamID = :teamIDInput AND s.year = :yearInput;
 
+
+
+-- Get players with dynamic filtering (from suggestions)
+SELECT p.playerID, p.name, p.age, p.jerseyNumber, t.name AS teamName, pos.name AS positionName, c.name AS conferenceName
+  FROM Players p
+  JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
+  JOIN Teams t ON stp.teamID = t.teamID
+  JOIN PlayerPositions pp ON p.playerID = pp.playerID
+  JOIN Positions pos ON pp.positionID = pos.positionID
+  JOIN Conferences c ON t.conferenceID = c.conferenceID
+  WHERE (:nameInput IS NULL OR p.name LIKE CONCAT('%', :nameInput, '%'))
+    AND (:ageInput IS NULL OR p.age = :ageInput)
+    AND (:teamIDInput IS NULL OR t.teamID = :teamIDInput)
+    AND (:positionIDInput IS NULL OR pos.positionID = :positionIDInput)
+    AND (:conferenceIDInput IS NULL OR c.conferenceID = :conferenceIDInput);
+
 -- UPDATE queries
 
 -- Update player information
