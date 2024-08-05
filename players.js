@@ -76,23 +76,3 @@ router.get('/edit/:playerID', (req, res) => {
     }
   });
 });
-
-// GET: Display add form
-router.get('/add', (req, res) => {
-  db.query('SELECT * FROM Teams', (err, teams) => {
-    if (err) throw err;
-    db.query('SELECT * FROM Positions', (err, positions) => {
-      if (err) throw err;
-      res.render('players_add', { teams, positions });
-    });
-  });
-});
-// POST: Add a new player
-router.post('/add', (req, res) => {
-  const { name, age, jerseyNumber, teamID, positionID } = req.body;
-  const query = 'INSERT INTO Players (name, age, jerseyNumber, teamID, positionID) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [name, age, jerseyNumber, teamID, positionID], (err) => {
-    if (err) throw err;
-    res.redirect('/players');
-  });
-});
