@@ -2,13 +2,26 @@
 
 An NBA quiz game designed for CS340.
 
-### Running locally
+### Setup locally
 
-Currently you can run a static file server for these files with one of these commands:
+Ensure you have a .env file:
 
 ``` shell
-python -m http.server 8000
-ruby -run -ehttpd . -p8000
+cp .env.example .env
+```
+
+And fill in your local database info in `.env`.
+
+Install node >21 and install dependencies:
+
+``` shell
+npm install
+```
+
+### Running locally
+
+``` shell
+npm start
 ```
 
 ### Deploying
