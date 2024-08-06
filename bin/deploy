@@ -4,4 +4,9 @@
 # engr server. Change username if you want to upload to a different user's folder.
 #
 
-scp *.{css,html,js} zahariat@access.engr.oregonstate.edu:public_html/cs340
+# TODO could rsync or do this in a better way
+scp *.{css,html,js,json} zahariat@access.engr.oregonstate.edu:cs340/lebron
+scp views/*.ejs zahariat@access.engr.oregonstate.edu:cs340/lebron/views
+scp views/partials/*.ejs zahariat@access.engr.oregonstate.edu:cs340/lebron/views/partials
+scp public/*.{css,html,js,json} zahariat@access.engr.oregonstate.edu:cs340/lebron/public
+scp database/*.{css,html,js,json} zahariat@access.engr.oregonstate.edu:cs340/lebron/database

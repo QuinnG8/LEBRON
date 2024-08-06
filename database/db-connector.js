@@ -1,8 +1,7 @@
 const mysql = require('mysql');
 
-console.log(process.env.DB_USER, process.env.DB_PASSWORD, process.env.DB_NAME);
 const db = mysql.createConnection({
-  host: "localhost",
+  host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER, // Update with your MySQL username
   password: process.env.DB_PASSWORD, // Update with your MySQL password
   database: process.env.DB_NAME, // Update with your database name
