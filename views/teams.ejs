@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBA Quiz Game - teams</title>
+  <link rel="stylesheet" href="/reset.css" />
+  <link rel="stylesheet" href="/LEBRON.css" />
+  <script src="/form_controls.js" defer></script>
+  <script src="/teams.js" defer></script>
+</head>
+<body>
+  <%- include("partials/header") %>
+  <main>
+    <h2>Teams</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Conference</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% teams.forEach(function(team) { %>
+          <tr>
+            <td><%= team.name %></td>
+            <td><%= team.conference %></td>
+            <td><a href="/teams/edit/<%= team.teamID %>" class="button edit-button">Edit</a></td>
+            <td>
+              <form action="/teams/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this team?');">
+                <input type="hidden" name="teamID" value="<%= team.teamID %>" />
+                <input type="submit" value="Delete" class="button delete-button" />
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    
+    <!-- Add team Button -->
+    <a href="/teams/add" class="button add-button">Add team</a>
+
+    <!-- Add team Form -->
+    <form id="add-form" method="post" action="/teams/add" style="display: none;">
+      <h3>Add team</h3>
+      <fieldset>
+        <label for="add-name">Name:</label>
+        <input type="text" id="add-name" name="name" required />
+      </fieldset>
+      <fieldset>
+        <label for="add-age">Age:</label>
+        <input type="number" id="add-age" name="age" min="18" max="100" required />
+      </fieldset>
+      <fieldset>
+        <label for="add-jerseyNumber">Jersey Number:</label>
+        <input type="number" id="add-jerseyNumber" name="jerseyNumber" required />
+      </fieldset>
+      <input type="submit" value="Add team" />
+      <a href="/teams" class="button cancel-button">Cancel</a>
+    </form>
+    
+    <!-- Edit team Form -->
+    <form id="edit-form" method="post" action="/teams/update" style="display: none;">
+      <h3>Edit team</h3>
+      <fieldset>
+        <label for="edit-id">team ID:</label>
+        <input type="number" id="edit-id" name="teamID" required />
+      </fieldset>
+      <fieldset>
+        <label for="edit-name">Name:</label>
+        <input type="text" id="edit-name" name="name" />
+      </fieldset>
+      <fieldset>
+        <label for="edit-age">Age:</label>
+        <input type="number" id="edit-age" name="age" min="18" max="100" />
+      </fieldset>
+      <fieldset>
+        <label for="edit-jerseyNumber">Jersey Number:</label>
+        <input type="number" id="edit-jerseyNumber" name="jerseyNumber" />
+      </fieldset>
+      <input type="submit" value="Update team" />
+      <a href="/teams" class="button cancel-button">Cancel</a>
+    </form>
+  </main>
+</body>
+</html>
