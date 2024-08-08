@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Quiz Game - Generate Quiz</title>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/LEBRON.css">
+    <link rel="stylesheet" href="/quiz.css"> <!-- New CSS file -->
+    <script src="/quiz.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1><a href="/">LEBRON - The NBA Player Guessing Game 🏀</a></h1>
+        <nav>
+            <ul>
+                <li><a href="/players">Browse Players</a></li>
+                <li><a href="/conferences">Browse Conferences</a></li>
+                <li><a href="/teams">Browse Teams</a></li>
+                <li><a href="/positions">Browse Positions</a></li>
+                <li><a href="/seasons">Browse Seasons</a></li>
+                <li><a href="/season_team_players">Browse Season Players</a></li>
+                <li><a href="/player_positions">Browse Player Positions</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form id="guess-form">
+            <label for="player-guess">Guess the Player:</label>
+            <input type="text" id="player-guess" name="player-guess">
+            <button type="submit">Submit</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Guess</th>
+                    <th>Age</th>
+                    <th>Number</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>Conference</th>
+                </tr>
+            </thead>
+            <tbody id="guesses">
+                <tr>
+                    <td>1</td>
+                    <td id="age1"></td>
+                    <td id="number1"></td>
+                    <td id="team1"></td>
+                    <td id="position1"></td>
+                    <td id="conference1"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td id="age2"></td>
+                    <td id="number2"></td>
+                    <td id="team2"></td>
+                    <td id="position2"></td>
+                    <td id="conference2"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td id="age3"></td>
+                    <td id="number3"></td>
+                    <td id="team3"></td>
+                    <td id="position3"></td>
+                    <td id="conference3"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td id="age4"></td>
+                    <td id="number4"></td>
+                    <td id="team4"></td>
+                    <td id="position4"></td>
+                    <td id="conference4"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td id="age5"></td>
+                    <td id="number5"></td>
+                    <td id="team5"></td>
+                    <td id="position5"></td>
+                    <td id="conference5"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="new-quiz">Generate New Quiz</button>
+    </main>
+</body>
+</html>
