@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 // READ: Display players
 router.get("/", (req, res) => {
   db.query(
-    `SELECT Players.playerID, Players.name, Players.age, Players.jerseyNumber as jerseyNumber, Positions.name as positionName, Teams.name as teamName, Seasons.year as year
+    `SELECT Players.playerID, Players.name, Players.age, Players.jerseyNumber, Positions.name as positionName, Teams.name as teamName, Seasons.year as year
     FROM Players 
     LEFT JOIN PlayerPositions ON PlayerPositions.playerID = Players.playerID
     LEFT JOIN Positions ON Positions.positionID = PlayerPositions.positionID
@@ -24,7 +24,10 @@ router.get("/", (req, res) => {
           if (err) throw err;
           db.query("SELECT * FROM Conferences", (err, conferences) => {
             if (err) throw err;
-            res.render("players", { players, teams, positions, conferences });
+            db.query("SELECT * FROM Seasons", (err, seasons) => {
+              if (err) throw err;
+              res.render("players", { players, teams, positions, conferences, seasons });
+            });
           });
         });
       });
@@ -40,7 +43,10 @@ router.get("/add", (req, res) => {
       if (err) throw err;
       db.query("SELECT * FROM Conferences", (err, conferences) => {
         if (err) throw err;
-        res.render("players_add", { teams, positions, conferences });
+        db.query("SELECT * FROM Seasons", (err, seasons) => {
+          if (err) throw err;
+          res.render("players_add", { teams, positions, conferences, seasons });
+        });
       });
     });
   });
@@ -48,20 +54,27 @@ router.get("/add", (req, res) => {
 
 // CREATE: Add a new player
 router.post("/add", (req, res) => {
-  const { name, age, jerseyNumber } = req.body;
-  const query =
-    "INSERT INTO Players (name, age, jerseyNumber) VALUES (?, ?, ?)";
-  db.query(query, [name, age, jerseyNumber], (err) => {
+  const { name, age, jerseyNumber, teamID, seasonID, positionID } = req.body;
+  const playerQuery = "INSERT INTO Players (name, age, jerseyNumber) VALUES (?, ?, ?)";
+  db.query(playerQuery, [name, age, jerseyNumber], (err, result) => {
     if (err) throw err;
-    res.redirect("/players");
+    const playerID = result.insertId;
+    const seasonTeamPlayerQuery = "INSERT INTO SeasonTeamPlayers (playerID, seasonID, teamID) VALUES (?, ?, ?)";
+    db.query(seasonTeamPlayerQuery, [playerID, seasonID, teamID], (err) => {
+      if (err) throw err;
+      const playerPositionQuery = "INSERT INTO PlayerPositions (playerID, positionID) VALUES (?, ?)";
+      db.query(playerPositionQuery, [playerID, positionID], (err) => {
+        if (err) throw err;
+        res.redirect("/players");
+      });
+    });
   });
 });
 
 // UPDATE: Update a player
 router.post("/update", (req, res) => {
   const { playerID, name, age, jerseyNumber } = req.body;
-  const query =
-    "UPDATE Players SET name = ?, age = ?, jerseyNumber = ? WHERE playerID = ?";
+  const query = "UPDATE Players SET name = ?, age = ?, jerseyNumber = ? WHERE playerID = ?";
   db.query(query, [name, age, jerseyNumber, playerID], (err) => {
     if (err) throw err;
     res.redirect("/players");
@@ -78,29 +91,25 @@ router.post("/delete", (req, res) => {
   });
 });
 
-module.exports = router;
-
 // GET: Display edit form for a specific player
 router.get("/edit/:playerID", (req, res) => {
   const playerID = req.params.playerID;
-  db.query(
-    "SELECT * FROM Players WHERE playerID = ?",
-    [playerID],
-    (err, results) => {
-      if (err) throw err;
-      const player = results[0];
-      if (player) {
-        // Fetch additional details if needed (e.g., teams, positions)
-        db.query("SELECT * FROM Teams", (err, teams) => {
+  db.query("SELECT * FROM Players WHERE playerID = ?", [playerID], (err, results) => {
+    if (err) throw err;
+    const player = results[0];
+    if (player) {
+      // Fetch additional details if needed (e.g., teams, positions)
+      db.query("SELECT * FROM Teams", (err, teams) => {
+        if (err) throw err;
+        db.query("SELECT * FROM Positions", (err, positions) => {
           if (err) throw err;
-          db.query("SELECT * FROM Positions", (err, positions) => {
-            if (err) throw err;
-            res.render("players_edit", { player, teams, positions });
-          });
+          res.render("players_edit", { player, teams, positions });
         });
-      } else {
-        res.redirect("/players"); // Redirect if player not found
-      }
+      });
+    } else {
+      res.redirect("/players"); // Redirect if player not found
     }
-  );
+  });
 });
+
+module.exports = router;

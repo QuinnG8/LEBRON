@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Player</title>
+  <title>Add New Player</title>
   <link rel="stylesheet" href="/reset.css" />
   <link rel="stylesheet" href="/LEBRON.css" />
 </head>
 <body>
   <%- include("partials/header") %>
   <main>
-    <h2>Add Player</h2>
-    <form method="post" action="/players/add">
+    <h2>Add New Player</h2>
+    <form method="POST" action="/players/add">
       <fieldset>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
@@ -25,24 +25,31 @@
         <input type="number" id="jerseyNumber" name="jerseyNumber" required />
       </fieldset>
       <fieldset>
-        <label for="team">Team:</label>
-        <select id="team" name="teamID" required>
-          <option value="">Select Team</option>
+        <label for="teamID">Team:</label>
+        <select id="teamID" name="teamID" required>
           <% teams.forEach(function(team) { %>
             <option value="<%= team.teamID %>"><%= team.name %></option>
           <% }); %>
         </select>
       </fieldset>
       <fieldset>
-        <label for="position">Position:</label>
-        <select id="position" name="positionID" required>
-          <option value="">Select Position</option>
+        <label for="seasonID">Season:</label>
+        <select id="seasonID" name="seasonID" required>
+          <% seasons.forEach(function(season) { %>
+            <option value="<%= season.seasonID %>"><%= season.year %></option>
+          <% }); %>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="positionID">Position:</label>
+        <select id="positionID" name="positionID" required>
           <% positions.forEach(function(position) { %>
             <option value="<%= position.positionID %>"><%= position.name %></option>
           <% }); %>
         </select>
       </fieldset>
       <input type="submit" value="Add Player" />
+      <a href="/players" class="button cancel-button">Cancel</a>
     </form>
   </main>
 </body>

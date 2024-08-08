@@ -86,6 +86,22 @@
         <label for="add-jerseyNumber">Jersey Number:</label>
         <input type="number" id="add-jerseyNumber" name="jerseyNumber" required />
       </fieldset>
+      <fieldset>
+        <label for="add-team">Team:</label>
+        <select id="add-team" name="teamID" required>
+          <% teams.forEach(function(team) { %>
+            <option value="<%= team.teamID %>"><%= team.name %></option>
+          <% }); %>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="add-season">Season:</label>
+        <select id="add-season" name="seasonID" required>
+          <% seasons.forEach(function(season) { %>
+            <option value="<%= season.seasonID %>"><%= season.year %></option>
+          <% }); %>
+        </select>
+      </fieldset>
       <input type="submit" value="Add Player" />
       <a href="/players" class="button cancel-button">Cancel</a>
     </form>
@@ -115,3 +131,4 @@
   </main>
 </body>
 </html>
+
