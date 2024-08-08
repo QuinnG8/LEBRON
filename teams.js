@@ -8,13 +8,15 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // READ: Display teams
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM Teams", (err, teams) => {
-    if (err) throw err;
-    db.query("SELECT * FROM Conferences", (err, conference) => {
+  db.query(
+    `SELECT Teams.name, Teams.teamID, Conferences.name as conferenceName
+    FROM Teams
+    LEFT JOIN Conferences ON Teams.conferenceID = Conferences.conferenceID`,
+    (err, teams) => {
       if (err) throw err;
       res.render("teams", { teams });
-    });
-  });
+    }
+  );
 });
 
 // NEW: Form to add a new team
@@ -39,19 +41,37 @@ router.post("/add", (req, res) => {
 router.get("/edit/:teamID", (req, res) => {
   const teamID = req.params.teamID;
   db.query(
-    "SELECT * FROM teams WHERE teamID = ?",
+    `SELECT Teams.name, Teams.teamID, Conferences.conferenceID as conferenceID
+    FROM Teams
+    LEFT JOIN Conferences ON Teams.conferenceID = Conferences.conferenceID
+    WHERE Teams.teamID = ?
+    LIMIT 1`,
     [teamID],
     (err, results) => {
       if (err) throw err;
       const team = results[0];
+
       if (team) {
-        // Fetch additional details if needed (e.g., teams, positions)
-        res.render("teams_edit", { team, teams, positions });
+        db.query("SELECT * FROM Conferences", (err, conferences) => {
+          if (err) throw err;
+
+          res.render("teams_edit", { team, conferences });
+        });
       } else {
         res.redirect("/teams"); // Redirect if team not found
       }
     }
   );
+});
+
+// UPDATE: Update a player
+router.post("/update", (req, res) => {
+  const { teamID, name, conferenceID } = req.body;
+  const query = "UPDATE Teams SET name = ?, conferenceID = ? WHERE teamID = ?";
+  db.query(query, [name, conferenceID, teamID], (err) => {
+    if (err) throw err;
+    res.redirect("/teams");
+  });
 });
 
 module.exports = router;

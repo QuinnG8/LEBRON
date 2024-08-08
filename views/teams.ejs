@@ -26,7 +26,7 @@
         <% teams.forEach(function(team) { %>
           <tr>
             <td><%= team.name %></td>
-            <td><%= team.conference %></td>
+            <td><%= team.conferenceName %></td>
             <td><a href="/teams/edit/<%= team.teamID %>" class="button edit-button">Edit</a></td>
             <td>
               <form action="/teams/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this team?');">
