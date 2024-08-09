@@ -6,8 +6,7 @@
     <title>NBA Quiz Game - Generate Quiz</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/LEBRON.css">
-    <link rel="stylesheet" href="/quiz.css"> <!-- New CSS file -->
-    <script src="/quiz.js" defer></script>
+    <link rel="stylesheet" href="/quiz.css"> 
 </head>
 <body>
     <header>
@@ -30,61 +29,161 @@
             <input type="text" id="player-guess" name="player-guess">
             <button type="submit">Submit</button>
         </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>Guess</th>
-                    <th>Age</th>
-                    <th>Number</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>Conference</th>
-                </tr>
-            </thead>
-            <tbody id="guesses">
-                <tr>
-                    <td>1</td>
-                    <td id="age1"></td>
-                    <td id="number1"></td>
-                    <td id="team1"></td>
-                    <td id="position1"></td>
-                    <td id="conference1"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td id="age2"></td>
-                    <td id="number2"></td>
-                    <td id="team2"></td>
-                    <td id="position2"></td>
-                    <td id="conference2"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td id="age3"></td>
-                    <td id="number3"></td>
-                    <td id="team3"></td>
-                    <td id="position3"></td>
-                    <td id="conference3"></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td id="age4"></td>
-                    <td id="number4"></td>
-                    <td id="team4"></td>
-                    <td id="position4"></td>
-                    <td id="conference4"></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td id="age5"></td>
-                    <td id="number5"></td>
-                    <td id="team5"></td>
-                    <td id="position5"></td>
-                    <td id="conference5"></td>
-                </tr>
-            </tbody>
+        <table id="guesses">
+            <tr>
+                <th>Guess #</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Jersey Number</th>
+                <th>Team</th>
+                <th>Position</th>
+                <th>Conference</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td id="name1"></td>
+                <td id="age1"></td>
+                <td id="number1"></td>
+                <td id="team1"></td>
+                <td id="position1"></td>
+                <td id="conference1"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td id="name2"></td>
+                <td id="age2"></td>
+                <td id="number2"></td>
+                <td id="team2"></td>
+                <td id="position2"></td>
+                <td id="conference2"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td id="name3"></td>
+                <td id="age3"></td>
+                <td id="number3"></td>
+                <td id="team3"></td>
+                <td id="position3"></td>
+                <td id="conference3"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="name4"></td>
+                <td id="age4"></td>
+                <td id="number4"></td>
+                <td id="team4"></td>
+                <td id="position4"></td>
+                <td id="conference4"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td id="name5"></td>
+                <td id="age5"></td>
+                <td id="number5"></td>
+                <td id="team5"></td>
+                <td id="position5"></td>
+                <td id="conference5"></td>
+            </tr>
         </table>
         <button id="new-quiz">Generate New Quiz</button>
+        <script>
+
+            let guessCounter = 1; // Initialize the guess counter
+            const correctName = 'LeBron James'; // Set the correct answer
+            const correctAge = 37; // Set the correct answer
+            const correctNumber = 6; // Set the correct answer
+            const correctTeam = 'Los Angeles Lakers';
+            const correctPosition = 'Small Forward';
+            const correctConference = 'Western Conference';
+
+
+            document.getElementById('guess-form').addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent the form from submitting normally
+
+                const playerName = document.getElementById('player-guess').value;
+                console.log("PLAYERS NAME: ");
+                console.log(playerName);
+
+                fetch('/quiz/guess', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 'player-guess': playerName })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Player not found');
+                    }
+                    return response.json();
+                })
+                .then(player => {
+                    // Process the player data
+                    updateGuessTable(player, guessCounter);
+                    guessCounter ++;
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+                document.getElementById('player-guess').value = '';
+
+            });
+
+            function updateGuessTable(player, guessNumber) {
+                document.getElementById(`name${guessNumber}`).textContent = player.name;
+                document.getElementById(`age${guessNumber}`).textContent = player.age;
+                document.getElementById(`number${guessNumber}`).textContent = player.jerseyNumber;
+                document.getElementById(`team${guessNumber}`).textContent = player.teamName;
+                document.getElementById(`position${guessNumber}`).textContent = player.positionName;
+                document.getElementById(`conference${guessNumber}`).textContent = player.conferenceName;
+                checkAnswers(player, guessNumber);
+            }
+            function checkAnswers(player, guessNumber) {
+                // Name
+                if (player.name === correctName){
+                    document.getElementById(`name${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+
+                // Age rules
+                if (player.age === correctAge){
+                    document.getElementById(`age${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+                else if (player.age - correctAge < 4 && player.age - correctAge > -4){
+                    document.getElementById(`age${guessNumber}`).style.backgroundColor = '#ffde21';
+                }
+
+                // Jersey Number rules
+                if (player.jerseyNumber === correctNumber){
+                    document.getElementById(`number${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+                else if (player.jerseyNumber - correctNumber < 4 && player.jerseyNumber - correctNumber > -4){
+                    document.getElementById(`number${guessNumber}`).style.backgroundColor = '#ffde21';
+                }
+
+                // Team rules
+                if (player.teamName === correctTeam){
+                    document.getElementById(`team${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+
+                // Position rules
+                if (player.positionName === correctPosition){
+                    document.getElementById(`position${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+
+                // Conference rules
+                if (player.conferenceName === correctConference){
+                    document.getElementById(`conference${guessNumber}`).style.backgroundColor = '#00FF00';
+                }
+            }
+            
+            document.getElementById('new-quiz').addEventListener('click', function() {
+                // Reload the current page
+                window.location.reload();
+            });
+
+        </script>
+
+        
     </main>
 </body>
 </html>

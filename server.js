@@ -10,6 +10,7 @@ const db = require("./database/db-connector");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
 app.use(express.static("public"));
 
 // Set up EJS as the view engine
