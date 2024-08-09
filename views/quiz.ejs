@@ -89,12 +89,13 @@
         <script>
 
             let guessCounter = 1; // Initialize the guess counter
-            const correctName = 'LeBron James'; // Set the correct answer
-            const correctAge = 37; // Set the correct answer
-            const correctNumber = 6; // Set the correct answer
-            const correctTeam = 'Los Angeles Lakers';
-            const correctPosition = 'Small Forward';
-            const correctConference = 'Western Conference';
+            const correctPlayer = <%- JSON.stringify(randomPlayer) %>;
+            const correctName = correctPlayer.name; // Set the correct answer
+            const correctAge = correctPlayer.age; // Set the correct answer
+            const correctNumber = correctPlayer.jerseyNumber; // Set the correct answer
+            const correctTeam = correctPlayer.teamName;
+            const correctPosition = correctPlayer.positionName;
+            const correctConference = correctPlayer.conferenceName;
 
 
             document.getElementById('guess-form').addEventListener('submit', function (e) {
@@ -125,6 +126,7 @@
                 .catch(error => {
                     alert(error.message);
                 });
+
                 document.getElementById('player-guess').value = '';
 
             });
