@@ -74,4 +74,15 @@ router.post("/update", (req, res) => {
   });
 });
 
+// DELETE: Delete a team
+router.post("/delete", (req, res) => {
+  const { teamID } = req.body;
+  const query = "DELETE FROM Teams WHERE teamID = ?";
+  db.query(query, [teamID], (err) => {
+    if (err) throw err;
+    res.redirect("/teams");
+  });
+});
+
+
 module.exports = router;
