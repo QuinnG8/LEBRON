@@ -8,9 +8,16 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // READ: Display positions
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM Positions", (err, positions) => {
-    res.render("positions", { positions });
-  });
+  db.query(
+    `SELECT Positions.name as name,
+      Positions.positionID AS positionID,
+      (SELECT count(*) FROM PlayerPositions WHERE PlayerPositions.positionID = Positions.positionID) as playerCount
+      FROM Positions
+      `,
+    (err, positions) => {
+      res.render("positions", { positions });
+    }
+  );
 });
 
 // NEW: Form to add a new position
@@ -42,12 +49,32 @@ router.get("/edit/:positionID", (req, res) => {
       const position = results[0];
       if (position) {
         // Fetch additional details if needed)
-        res.render("positions_edit", { positions });
+        res.render("positions_edit", { position });
       } else {
         res.redirect("/positions"); // Redirect if position not found
       }
     }
   );
+});
+
+// UPDATE: Update a position
+router.post("/update", (req, res) => {
+  const { name, positionID } = req.body;
+  const query = "UPDATE Positions SET name = ? WHERE positionID = ?";
+  db.query(query, [name, positionID], (err) => {
+    if (err) throw err;
+    res.redirect("/positions");
+  });
+});
+
+// DELETE: Delete a position
+router.post("/delete", (req, res) => {
+  const { positionID } = req.body;
+  const query = "DELETE FROM Positions WHERE positionID = ?";
+  db.query(query, [positionID], (err) => {
+    if (err) throw err;
+    res.redirect("/positions");
+  });
 });
 
 module.exports = router;

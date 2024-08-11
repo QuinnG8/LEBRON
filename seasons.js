@@ -53,7 +53,6 @@ router.get("/edit/:seasonID", (req, res) => {
 // UPDATE: Update a season
 router.post("/update", (req, res) => {
   const { year, seasonID } = req.body;
-  console.log("Body: ", req.body);
   const query = "UPDATE Seasons SET year = ? WHERE seasonID = ?";
   db.query(query, [year, seasonID], (err) => {
     if (err) throw err;
@@ -64,7 +63,7 @@ router.post("/update", (req, res) => {
 // DELETE: Delete a season
 router.post("/delete", (req, res) => {
   const { seasonID } = req.body;
-  const query = "DELETE FROM seasons WHERE seasonID = ?";
+  const query = "DELETE FROM Seasons WHERE seasonID = ?";
   db.query(query, [seasonID], (err) => {
     if (err) throw err;
     res.redirect("/seasons");

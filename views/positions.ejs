@@ -17,6 +17,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Number of Players</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -25,9 +26,11 @@
         <% positions.forEach(function(position) { %>
           <tr>
             <td><%= position.name %></td>
+            <td><%= position.playerCount %></td>
             <td><a href="/positions/edit/<%= position.positionID %>" class="button edit-button">Edit</a></td>
             <td>
               <form action="/positions/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this position?');">
+                
                 <input type="hidden" name="positionID" value="<%= position.positionID %>" />
                 <input type="submit" value="Delete" class="button delete-button" />
               </form>
