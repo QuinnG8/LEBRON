@@ -12,7 +12,7 @@
 <body>
   <%- include("partials/header") %>
   <main>
-    <h2>Players</h2>
+    <h2>Season Players</h2>
     <table>
       <thead>
         <tr>
@@ -43,48 +43,6 @@
     
     <!-- Add Player Button -->
     <a href="/season_players/add" class="button add-button">Add Player</a>
-
-    <!-- Add Player Form -->
-    <form id="add-form" method="post" action="/players/add" style="display: none;">
-      <h3>Add Player</h3>
-      <fieldset>
-        <label for="add-name">Name:</label>
-        <input type="text" id="add-name" name="name" required />
-      </fieldset>
-      <fieldset>
-        <label for="add-age">Age:</label>
-        <input type="number" id="add-age" name="age" min="18" max="100" required />
-      </fieldset>
-      <fieldset>
-        <label for="add-jerseyNumber">Jersey Number:</label>
-        <input type="number" id="add-jerseyNumber" name="jerseyNumber" required />
-      </fieldset>
-      <input type="submit" value="Add Player" />
-      <a href="/players" class="button cancel-button">Cancel</a>
-    </form>
-    
-    <!-- Edit Player Form -->
-    <form id="edit-form" method="post" action="/players/update" style="display: none;">
-      <h3>Edit Player</h3>
-      <fieldset>
-        <label for="edit-id">Player ID:</label>
-        <input type="number" id="edit-id" name="playerID" required />
-      </fieldset>
-      <fieldset>
-        <label for="edit-name">Name:</label>
-        <input type="text" id="edit-name" name="name" />
-      </fieldset>
-      <fieldset>
-        <label for="edit-age">Age:</label>
-        <input type="number" id="edit-age" name="age" min="18" max="100" />
-      </fieldset>
-      <fieldset>
-        <label for="edit-jerseyNumber">Jersey Number:</label>
-        <input type="number" id="edit-jerseyNumber" name="jerseyNumber" />
-      </fieldset>
-      <input type="submit" value="Update Player" />
-      <a href="/players" class="button cancel-button">Cancel</a>
-    </form>
   </main>
 </body>
 </html>
