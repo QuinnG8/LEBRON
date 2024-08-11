@@ -46,9 +46,10 @@ router.post("/add", (req, res) => {
 
 // DELETE: Delete a player_position
 router.post("/delete", (req, res) => {
-  const { player_positionID } = req.body;
-  const query = "DELETE FROM PlayerPositions WHERE player_positionID = ?";
-  db.query(query, [player_positionID], (err) => {
+  const { playerPositionID } = req.body;
+  console.log("PlayerPositionID: ", req.body);
+  const query = "DELETE FROM PlayerPositions WHERE playerPositionID = ?";
+  db.query(query, [playerPositionID], (err) => {
     if (err) throw err;
     res.redirect("/player_positions");
   });

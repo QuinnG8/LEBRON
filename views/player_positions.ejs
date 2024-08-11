@@ -29,8 +29,8 @@
             <td><%= player_position.position_name %></td>
             <td><a href="/player_positions/edit/<%= player_position.playerPositionID %>" class="button edit-button">Edit</a></td>
             <td>
-              <form action="/player_positions/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this player from the season?');">
-                <input type="hidden" name="playerID" value="<%= player_position.positionPlayerID %>" />
+              <form action="/player_positions/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this player position?');">
+                <input type="hidden" name="playerPositionID" value="<%= player_position.playerPositionID %>" />
                 <input type="submit" value="Delete" class="button delete-button" />
               </form>
             </td>
