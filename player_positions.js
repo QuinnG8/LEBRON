@@ -44,17 +44,6 @@ router.post("/add", (req, res) => {
   });
 });
 
-// UPDATE: Update a player_position
-router.post("/update", (req, res) => {
-  const { player_positionID, name, age, jerseyNumber } = req.body;
-  const query =
-    "UPDATE PlayerPositions SET name = ?, age = ?, jerseyNumber = ? WHERE player_positionID = ?";
-  db.query(query, [name, age, jerseyNumber, player_positionID], (err) => {
-    if (err) throw err;
-    res.redirect("/player_positions");
-  });
-});
-
 // DELETE: Delete a player_position
 router.post("/delete", (req, res) => {
   const { player_positionID } = req.body;
@@ -71,20 +60,26 @@ module.exports = router;
 router.get("/edit/:player_positionID", (req, res) => {
   const player_positionID = req.params.player_positionID;
   db.query(
-    "SELECT * FROM PlayerPositions WHERE player_positionID = ?",
+    `SELECT PlayerPositions.playerPositionID, Players.name as playerName, 
+        Players.playerID as playerID,    
+        Positions.positionID as positionID, Positions.name as positionName
+     FROM PlayerPositions 
+     LEFT JOIN Positions ON Positions.positionID = PlayerPositions.positionID
+     LEFT JOIN Players ON Players.playerID = PlayerPositions.playerID
+     WHERE playerPositionID = ?
+     LIMIT 1`,
     [player_positionID],
     (err, results) => {
       if (err) throw err;
       const player_position = results[0];
       if (player_position) {
-        // Fetch additional details if needed (e.g., teams, positions)
-        db.query("SELECT * FROM Teams", (err, teams) => {
+        db.query("SELECT * FROM Players", (err, players) => {
           if (err) throw err;
           db.query("SELECT * FROM Positions", (err, positions) => {
             if (err) throw err;
             res.render("player_positions_edit", {
               player_position,
-              teams,
+              players,
               positions,
             });
           });
@@ -94,4 +89,15 @@ router.get("/edit/:player_positionID", (req, res) => {
       }
     }
   );
+});
+
+// UPDATE: Update a player_position
+router.post("/update", (req, res) => {
+  const { playerPositionID, playerID, positionID } = req.body;
+  const query =
+    "UPDATE PlayerPositions SET playerID = ?, positionID = ? WHERE playerPositionID = ?";
+  db.query(query, [playerID, positionID, playerPositionID], (err) => {
+    if (err) throw err;
+    res.redirect("/player_positions");
+  });
 });

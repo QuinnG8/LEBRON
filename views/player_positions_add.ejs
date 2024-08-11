@@ -11,16 +11,7 @@
   <%- include("partials/header") %>
   <main>
     <h2>Add Player Position</h2>
-    <form method="post" action="/player_positions/add">
-      <fieldset>
-        <label for="positionID">Position:</label>
-        <select id="positionID" name="positionID" required>
-          <option value="">Select Position</option>
-          <% positions.forEach(function(position) { %>
-            <option value="<%= position.positionID %>"><%= position.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>      
+    <form method="post" action="/player_positions/add">  
       <fieldset>
         <label for="player">Player:</label>
         <select id="player" name="playerID" required>
@@ -30,6 +21,15 @@
           <% }); %>
         </select>
       </fieldset>
+      <fieldset>
+        <label for="positionID">Position:</label>
+        <select id="positionID" name="positionID" required>
+          <option value="">Select Position</option>
+          <% positions.forEach(function(position) { %>
+            <option value="<%= position.positionID %>"><%= position.name %></option>
+          <% }); %>
+        </select>
+      </fieldset>    
       <input type="submit" value="Add Player Position" />
     </form>
   </main>
