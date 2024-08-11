@@ -35,19 +35,40 @@ router.post("/add", (req, res) => {
 router.get("/edit/:seasonID", (req, res) => {
   const seasonID = req.params.seasonID;
   db.query(
-    "SELECT * FROM Seasons WHERE seasonID = ?",
+    "SELECT * FROM Seasons WHERE seasonID = ? LIMIT 1",
     [seasonID],
     (err, results) => {
       if (err) throw err;
       const season = results[0];
       if (season) {
         // Fetch additional details if needed)
-        res.render("seasons_edit", { seasons });
+        res.render("seasons_edit", { season });
       } else {
         res.redirect("/seasons"); // Redirect if season not found
       }
     }
   );
+});
+
+// UPDATE: Update a season
+router.post("/update", (req, res) => {
+  const { year, seasonID } = req.body;
+  console.log("Body: ", req.body);
+  const query = "UPDATE Seasons SET year = ? WHERE seasonID = ?";
+  db.query(query, [year, seasonID], (err) => {
+    if (err) throw err;
+    res.redirect("/seasons");
+  });
+});
+
+// DELETE: Delete a season
+router.post("/delete", (req, res) => {
+  const { seasonID } = req.body;
+  const query = "DELETE FROM seasons WHERE seasonID = ?";
+  db.query(query, [seasonID], (err) => {
+    if (err) throw err;
+    res.redirect("/seasons");
+  });
 });
 
 module.exports = router;
