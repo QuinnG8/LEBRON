@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Player Position</title>
+  <link rel="stylesheet" href="/reset.css" />
+  <link rel="stylesheet" href="/LEBRON.css" />
+</head>
+<body>
+  <%- include("partials/header") %>
+  <main>
+    <h2>Edit Player Position</h2>
+    <form method="post" action="/player_positions/update">  
+      <input type="hidden" name="playerPositionID" value="<%= player_position.playerPositionID %>" />
+      <fieldset>
+        <label for="player">Player <%- player_position.playerID %>!:</label>
+        <select id="player" name="playerID" required>
+          <option value="">Select Player</option>
+          <% players.forEach(function(player) { %>
+            <option value="<%= player.playerID %>" <%= player_position.playerID === player.playerID ? "selected" : "" %>><%= player.name %></option>
+          <% }); %>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="positionID">Position:</label>
+        <select id="positionID" name="positionID" required>
+          <option value="">Select Position</option>
+          <% positions.forEach(function(position) { %>
+            <option value="<%= position.positionID %>" <%= player_position.positionID === position.positionID ? "selected" : "" %>><%= position.name %></option>
+          <% }); %>
+        </select>
+      </fieldset>    
+      <input type="submit" value="Update Player Position" />
+    </form>
+  </main>
+</body>
+</html>

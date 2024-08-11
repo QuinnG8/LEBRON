@@ -40,12 +40,33 @@ router.get("/edit/:conferenceID", (req, res) => {
       const conference = results[0];
       if (conference) {
         // Fetch additional details if needed (e.g., teams, positions)
-        res.render("conferences_edit", { conference, teams, positions });
+        res.render("conferences_edit", { conference });
       } else {
         res.redirect("/conferences"); // Redirect if conference not found
       }
     }
   );
+});
+
+// UPDATE: Update a conference
+router.post("/update", (req, res) => {
+  const { conferenceID, name } = req.body;
+  const query =
+    "UPDATE Conferences SET name = ? WHERE Conferences.conferenceID = ?";
+  db.query(query, [name, conferenceID], (err) => {
+    if (err) throw err;
+    res.redirect("/conferences");
+  });
+});
+
+// DELETE: Delete a conference
+router.post("/delete", (req, res) => {
+  const { conferenceID } = req.body;
+  const query = "DELETE FROM Conferences WHERE conferenceID = ?";
+  db.query(query, [conferenceID], (err) => {
+    if (err) throw err;
+    res.redirect("/conferences");
+  });
 });
 
 module.exports = router;
