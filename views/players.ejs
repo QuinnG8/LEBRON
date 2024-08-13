@@ -11,28 +11,29 @@
   <%- include("partials/header") %>
   <main>
     <h2>Players</h2>
-    <form action="/players/search" method="GET">
-      <input name="name" type="text" placeholder="Search by Name" />
-      <input name="age" type="number" step="1" min="18" max="100" placeholder="Age" />
-      <select name="team_id">
+    <form action="/players/" method="GET">
+      <input name="name" onchange="this.form.submit()" type="text" placeholder="Search by Name" value="<%= filters.name %>" />
+      <input name="age" onchange="this.form.submit()" type="number" step="1" min="18" max="100" placeholder="Age" value="<%= filters.age %>" />
+      <select name="team_id" onchange="this.form.submit()">
         <option value="">Select Team</option>
         <% teams.forEach(function(team) { %>
-          <option value="<%= team.teamID %>"><%= team.name %></option>
+          <option value="<%= team.teamID %>" <%= filters.team_id === team.teamID ? "selected" : "" %>><%= team.name %></option>
         <% }); %>
       </select>
-      <select name="position_id">
+      <select name="position_id" onchange="this.form.submit()">
         <option value="">Select Position</option>
         <% positions.forEach(function(position) { %>
-          <option value="<%= position.positionID %>"><%= position.name %></option>
+          <option value="<%= position.positionID %>" <%= filters.position_id === position.positionID ? "selected" : "" %>><%= position.name %></option>
         <% }); %>
       </select>
-      <select name="conference_id">
+      <select name="conference_id" onchange="this.form.submit()">
         <option value="">Select Conference</option>
         <% conferences.forEach(function(conference) { %>
-          <option value="<%= conference.conferenceID %>"><%= conference.name %></option>
+          <option value="<%= conference.conferenceID %>" <%= filters.conference_id === conference.conferenceID ? "selected" : "" %>><%= conference.name %></option>
         <% }); %>
       </select>
       <input type="submit" value="Search" />
+      <input type="button" value="Reset" onclick="document.location.href = '/players'" />
     </form>
     <table>
       <thead>
