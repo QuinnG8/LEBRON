@@ -13,7 +13,7 @@
       <h2>Edit Season</h2>
       <form method="post" action="/seasons/update">
         <input type="hidden" name="seasonID" value="<%= season.seasonID %>" />
-        <label for="seasonID">Season <%- season.year %>!:</label>
+        <label for="seasonID">Season <%- season.year %>:</label>
         <fieldset>
           <label for="year">Year:</label>
           <input type="number" name="year" value="<%= season.year %>" />

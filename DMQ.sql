@@ -1,10 +1,10 @@
--- CS 340 Summer 2024
--- Project Step 2 Draft
--- Group 79
--- Quinn Glenn
--- Tieg Zaharia
-
+-- CS 340 Summer 2024 / Project Step 5 / Group 79
+-- Authors: Quinn Glenn, Tieg Zaharia
+-- Description: this is the MariaDB DML (Data Manipulation Queries) file containing SQL 
+--              necessary for the CRUD interactions in the LEBRON basketball quiz game.
+-- 
 -- Special characters for variables: :variableName
+
 
 -- INSERT queries
 
@@ -48,14 +48,33 @@ VALUES (
 
 -- SELECT queries
 
--- Get all players
-SELECT * FROM Players;
+-- Get all players with the relevant associated tables' info.
+SELECT Players.playerID, 
+       Players.name, 
+       Players.age, 
+       Players.jerseyNumber, 
+       Positions.name as positionName, 
+       Teams.name as teamName, 
+       Seasons.year as year
+  FROM Players 
+  LEFT JOIN PlayerPositions ON PlayerPositions.playerID = Players.playerID
+  LEFT JOIN Positions ON Positions.positionID = PlayerPositions.positionID
+  INNER JOIN SeasonTeamPlayers ON SeasonTeamPlayers.playerID = Players.playerID
+  LEFT JOIN Teams ON Teams.teamID = SeasonTeamPlayers.teamID
+  LEFT JOIN Seasons ON Seasons.seasonID = SeasonTeamPlayers.seasonID;
 
--- Get all teams
-SELECT * FROM Teams;
+-- Get all teams, with their associated conference name.
+SELECT Teams.name, 
+       Teams.teamID, 
+       Conferences.name as conferenceName
+  FROM Teams
+  LEFT JOIN Conferences ON Teams.conferenceID = Conferences.conferenceID;
 
--- Get all positions
-SELECT * FROM Positions;
+-- Get all positions, with the number of players for each position.
+SELECT Positions.name as name,
+       Positions.positionID AS positionID,
+       (SELECT count(*) FROM PlayerPositions WHERE PlayerPositions.positionID = Positions.positionID) as playerCount
+  FROM Positions;
 
 -- Get all conferences
 SELECT * FROM Conferences;

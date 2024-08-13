@@ -33,7 +33,7 @@ router.post("/add", (req, res) => {
 router.get("/edit/:conferenceID", (req, res) => {
   const conferenceID = req.params.conferenceID;
   db.query(
-    "SELECT * FROM conferences WHERE conferenceID = ?",
+    "SELECT * FROM Conferences WHERE conferenceID = ?",
     [conferenceID],
     (err, results) => {
       if (err) throw err;

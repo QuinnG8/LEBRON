@@ -34,3 +34,7 @@ Change username in the script if needed:
 ``` shell
 bin/deploy
 ```
+
+Current deployment mode is manual. Open a tmux shell ("tmux ls" to see open sessions, "tmux a -t 0" to attach to first open session, or "tmux" to open new session), and then run/restart:
+
+`node_modules/forever/bin/forever server.js start`

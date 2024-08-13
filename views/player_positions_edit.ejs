@@ -14,7 +14,7 @@
     <form method="post" action="/player_positions/update">  
       <input type="hidden" name="playerPositionID" value="<%= player_position.playerPositionID %>" />
       <fieldset>
-        <label for="player">Player <%- player_position.playerID %>!:</label>
+        <label for="player">Player <%- player_position.playerID %>:</label>
         <select id="player" name="playerID" required>
           <option value="">Select Player</option>
           <% players.forEach(function(player) { %>

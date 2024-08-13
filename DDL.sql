@@ -1,8 +1,10 @@
--- CS 340 Summer 2024 
--- Project Step 2 Draft
--- Group 79
--- Quinn Glenn
--- Tieg Zaharia
+-- CS 340 Summer 2024 / Project Step 5 / Group 79
+-- Authors: Quinn Glenn, Tieg Zaharia
+-- Description: this is the MariaDB DDL file containing SQL that creates/replaces the necessary
+--              tables for the LEBRON basketball quiz game, as well as INSERTs that 
+--              adds sample data into each table.
+-- 
+-- 
 
 -- Disable foreign key checks temporarily while we import the schema and data, to avoid
 -- foreign key dependencies.
