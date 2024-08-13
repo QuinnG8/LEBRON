@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Player Position</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Add Player Position</h2>
-    <form method="post" action="/player_positions/add">  
-      <fieldset>
-        <label for="player">Player:</label>
-        <select id="player" name="playerID" required>
-          <option value="">Select Player</option>
-          <% players.forEach(function(player) { %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Player Position</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Add Player Position</h2>
+      <form method="post" action="/player_positions/add">
+        <fieldset>
+          <label for="player">Player:</label>
+          <select id="player" name="playerID" required>
+            <option value="">Select Player</option>
+            <% players.forEach(function(player) { %>
             <option value="<%= player.playerID %>"><%= player.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>
-      <fieldset>
-        <label for="positionID">Position:</label>
-        <select id="positionID" name="positionID" required>
-          <option value="">Select Position</option>
-          <% positions.forEach(function(position) { %>
-            <option value="<%= position.positionID %>"><%= position.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>    
-      <input type="submit" value="Add Player Position" />
-    </form>
-  </main>
-</body>
+            <% }); %>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="positionID">Position:</label>
+          <select id="positionID" name="positionID" required>
+            <option value="">Select Position</option>
+            <% positions.forEach(function(position) { %>
+            <option value="<%= position.positionID %>">
+              <%= position.name %>
+            </option>
+            <% }); %>
+          </select>
+        </fieldset>
+        <input type="submit" value="Add Player Position" />
+      </form>
+    </main>
+  </body>
 </html>

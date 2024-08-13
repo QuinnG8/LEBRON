@@ -1,84 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NBA Quiz Game - conferences</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Conferences</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% conferences.forEach(function(conference) { %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Quiz Game - conferences</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Conferences</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% conferences.forEach(function(conference) { %>
           <tr>
             <td><%= conference.name %></td>
-            <td><a href="/conferences/edit/<%= conference.conferenceID %>" class="button edit-button">Edit</a></td>
             <td>
-              <form action="/conferences/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this conference?');">
-                <input type="hidden" name="conferenceID" value="<%= conference.conferenceID %>" />
-                <input type="submit" value="Delete" class="button delete-button" />
+              <a
+                href="/conferences/edit/<%= conference.conferenceID %>"
+                class="button edit-button"
+                >Edit</a
+              >
+            </td>
+            <td>
+              <form
+                action="/conferences/delete"
+                method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this conference?');"
+              >
+                <input
+                  type="hidden"
+                  name="conferenceID"
+                  value="<%= conference.conferenceID %>"
+                />
+                <input
+                  type="submit"
+                  value="Delete"
+                  class="button delete-button"
+                />
               </form>
             </td>
           </tr>
-        <% }); %>
-      </tbody>
-    </table>
-    
-    <!-- Add conference Button -->
-    <a href="/conferences/add" class="button add-button">Add conference</a>
+          <% }); %>
+        </tbody>
+      </table>
 
-    <!-- Add conference Form -->
-    <form id="add-form" method="post" action="/conferences/add" style="display: none;">
-      <h3>Add conference</h3>
-      <fieldset>
-        <label for="add-name">Name:</label>
-        <input type="text" id="add-name" name="name" required />
-      </fieldset>
-      <fieldset>
-        <label for="add-age">Age:</label>
-        <input type="number" id="add-age" name="age" min="18" max="100" required />
-      </fieldset>
-      <fieldset>
-        <label for="add-jerseyNumber">Jersey Number:</label>
-        <input type="number" id="add-jerseyNumber" name="jerseyNumber" required />
-      </fieldset>
-      <input type="submit" value="Add conference" />
-      <a href="/conferences" class="button cancel-button">Cancel</a>
-    </form>
-    
-    <!-- Edit conference Form -->
-    <form id="edit-form" method="post" action="/conferences/update" style="display: none;">
-      <h3>Edit conference</h3>
-      <fieldset>
-        <label for="edit-id">conference ID:</label>
-        <input type="number" id="edit-id" name="conferenceID" required />
-      </fieldset>
-      <fieldset>
-        <label for="edit-name">Name:</label>
-        <input type="text" id="edit-name" name="name" />
-      </fieldset>
-      <fieldset>
-        <label for="edit-age">Age:</label>
-        <input type="number" id="edit-age" name="age" min="18" max="100" />
-      </fieldset>
-      <fieldset>
-        <label for="edit-jerseyNumber">Jersey Number:</label>
-        <input type="number" id="edit-jerseyNumber" name="jerseyNumber" />
-      </fieldset>
-      <input type="submit" value="Update conference" />
-      <a href="/conferences" class="button cancel-button">Cancel</a>
-    </form>
-  </main>
-</body>
+      <!-- Add conference Button -->
+      <a href="/conferences/add" class="button add-button">Add conference</a>
+
+      <!-- Add conference Form -->
+      <form
+        id="add-form"
+        method="post"
+        action="/conferences/add"
+        style="display: none"
+      >
+        <h3>Add conference</h3>
+        <fieldset>
+          <label for="add-name">Name:</label>
+          <input type="text" id="add-name" name="name" required />
+        </fieldset>
+        <fieldset>
+          <label for="add-age">Age:</label>
+          <input
+            type="number"
+            id="add-age"
+            name="age"
+            min="18"
+            max="100"
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <label for="add-jerseyNumber">Jersey Number:</label>
+          <input
+            type="number"
+            id="add-jerseyNumber"
+            name="jerseyNumber"
+            required
+          />
+        </fieldset>
+        <input type="submit" value="Add conference" />
+        <a href="/conferences" class="button cancel-button">Cancel</a>
+      </form>
+
+      <!-- Edit conference Form -->
+      <form
+        id="edit-form"
+        method="post"
+        action="/conferences/update"
+        style="display: none"
+      >
+        <h3>Edit conference</h3>
+        <fieldset>
+          <label for="edit-id">conference ID:</label>
+          <input type="number" id="edit-id" name="conferenceID" required />
+        </fieldset>
+        <fieldset>
+          <label for="edit-name">Name:</label>
+          <input type="text" id="edit-name" name="name" />
+        </fieldset>
+        <fieldset>
+          <label for="edit-age">Age:</label>
+          <input type="number" id="edit-age" name="age" min="18" max="100" />
+        </fieldset>
+        <fieldset>
+          <label for="edit-jerseyNumber">Jersey Number:</label>
+          <input type="number" id="edit-jerseyNumber" name="jerseyNumber" />
+        </fieldset>
+        <input type="submit" value="Update conference" />
+        <a href="/conferences" class="button cancel-button">Cancel</a>
+      </form>
+    </main>
+  </body>
 </html>

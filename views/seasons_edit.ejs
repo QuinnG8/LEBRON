@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Season</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Edit Season</h2>
-    <form method="post" action="/seasons/update">  
-      <input type="hidden" name="seasonID" value="<%= season.seasonID %>" />
-      <label for="seasonID">Season <%- season.year %>!:</label>
-      <fieldset>
-        <label for="year">Year:</label>
-        <input type="number" name="year" value="<%= season.year %>" />
-      </fieldset>
-      <input type="submit" value="Update Season" />
-    </form>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Season</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Edit Season</h2>
+      <form method="post" action="/seasons/update">
+        <input type="hidden" name="seasonID" value="<%= season.seasonID %>" />
+        <label for="seasonID">Season <%- season.year %>!:</label>
+        <fieldset>
+          <label for="year">Year:</label>
+          <input type="number" name="year" value="<%= season.year %>" />
+        </fieldset>
+        <input type="submit" value="Update Season" />
+      </form>
+    </main>
+  </body>
 </html>

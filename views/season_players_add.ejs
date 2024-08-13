@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Season Player</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Add Season Player</h2>
-    <form method="post" action="/season_players/add">
-      <fieldset>
-        <label for="season">Season:</label>
-        <select id="season" name="seasonID" required>
-          <option value="">Select Season</option>
-          <% seasons.forEach(function(season) { %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Season Player</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Add Season Player</h2>
+      <form method="post" action="/season_players/add">
+        <fieldset>
+          <label for="season">Season:</label>
+          <select id="season" name="seasonID" required>
+            <option value="">Select Season</option>
+            <% seasons.forEach(function(season) { %>
             <option value="<%= season.seasonID %>"><%= season.year %></option>
-          <% }); %>
-        </select>
-      </fieldset>      
-      <fieldset>
-        <label for="team">Team:</label>
-        <select id="team" name="teamID" required>
-          <option value="">Select Team</option>
-          <% teams.forEach(function(team) { %>
+            <% }); %>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="team">Team:</label>
+          <select id="team" name="teamID" required>
+            <option value="">Select Team</option>
+            <% teams.forEach(function(team) { %>
             <option value="<%= team.teamID %>"><%= team.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>
-      <fieldset>
-        <label for="player">Player:</label>
-        <select id="player" name="playerID" required>
-          <option value="">Select Player</option>
-          <% players.forEach(function(player) { %>
+            <% }); %>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="player">Player:</label>
+          <select id="player" name="playerID" required>
+            <option value="">Select Player</option>
+            <% players.forEach(function(player) { %>
             <option value="<%= player.playerID %>"><%= player.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>
-      <input type="submit" value="Add Player" />
-    </form>
-  </main>
-</body>
+            <% }); %>
+          </select>
+        </fieldset>
+        <input type="submit" value="Add Player" />
+      </form>
+    </main>
+  </body>
 </html>

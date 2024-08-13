@@ -10,7 +10,7 @@ const db = require("./database/db-connector");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Set up EJS as the view engine
@@ -26,8 +26,7 @@ app.use("/positions", require("./positions.js"));
 app.use("/seasons", require("./seasons.js"));
 app.use("/season_players", require("./season_players.js"));
 app.use("/player_positions", require("./player_positions.js"));
-app.use("/quiz", require("./quiz.js")); 
-
+app.use("/quiz", require("./quiz.js"));
 
 // Start the server
 app.listen(port, () => {

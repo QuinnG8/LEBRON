@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Conference</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Add Team</h2>
-    <form method="post" action="/teams/add">
-      <fieldset>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
-      </fieldset>
-      <fieldset>
-        <label for="conference">Conference:</label>
-        <select id="conference" name="conferenceID" required>
-          <option value="">Select Conference</option>
-          <% conferences.forEach(function(conference) { %>
-            <option value="<%= conference.conferenceID %>"><%= conference.name %></option>
-          <% }); %>
-        </select>
-      </fieldset>
-      <input type="submit" value="Add Team" />
-    </form>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Conference</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Add Team</h2>
+      <form method="post" action="/teams/add">
+        <fieldset>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </fieldset>
+        <fieldset>
+          <label for="conference">Conference:</label>
+          <select id="conference" name="conferenceID" required>
+            <option value="">Select Conference</option>
+            <% conferences.forEach(function(conference) { %>
+            <option value="<%= conference.conferenceID %>">
+              <%= conference.name %>
+            </option>
+            <% }); %>
+          </select>
+        </fieldset>
+        <input type="submit" value="Add Team" />
+      </form>
+    </main>
+  </body>
 </html>

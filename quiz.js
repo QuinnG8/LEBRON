@@ -5,7 +5,7 @@ const db = require("./database/db-connector");
 
 // Route to render the quiz page and select a random player
 router.get("/", (req, res) => {
-    const query = `
+  const query = `
         SELECT p.name, p.age, p.jerseyNumber, t.name AS teamName, pos.name AS positionName, c.name AS conferenceName
         FROM Players p
         JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
@@ -17,25 +17,25 @@ router.get("/", (req, res) => {
         LIMIT 1;
     `;
 
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error("Database query error:", err);
-            res.status(500).send("Database query error");
-        } else if (results.length > 0) {
-            console.log("Random player selected:", results[0]);
-            const randomPlayer = results[0];
-            res.render("quiz", { randomPlayer }); // Pass the random player to the quiz.ejs
-        } else {
-            res.status(404).send("No players found");
-        }
-    });
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Database query error:", err);
+      res.status(500).send("Database query error");
+    } else if (results.length > 0) {
+      console.log("Random player selected:", results[0]);
+      const randomPlayer = results[0];
+      res.render("quiz", { randomPlayer }); // Pass the random player to the quiz.ejs
+    } else {
+      res.status(404).send("No players found");
+    }
+  });
 });
 
 // Route to handle player guess
 router.post("/guess", (req, res) => {
-    const playerName = req.body["player-guess"];
-    console.log(playerName)
-    const query = `
+  const playerName = req.body["player-guess"];
+  console.log(playerName);
+  const query = `
         SELECT p.name, p.age, p.jerseyNumber, t.name AS teamName, pos.name AS positionName, c.name AS conferenceName
         FROM Players p
         JOIN SeasonTeamPlayers stp ON p.playerID = stp.playerID
@@ -46,18 +46,18 @@ router.post("/guess", (req, res) => {
         WHERE p.name = ?;
     `;
 
-    db.query(query, [playerName], (err, results) => {
-        if (err) {
-            console.error("Database query error:", err); // Debugging
-            res.status(500).send("Database query error");
-        } else if (results.length > 0) {
-            console.log("Player found:", results[0]); // Debugging
-            res.json(results[0]);
-        } else {
-            console.log("Player not found for name:", playerName); // Debugging
-            res.status(404).send("Player not found");
-        }
-    });
+  db.query(query, [playerName], (err, results) => {
+    if (err) {
+      console.error("Database query error:", err); // Debugging
+      res.status(500).send("Database query error");
+    } else if (results.length > 0) {
+      console.log("Player found:", results[0]); // Debugging
+      res.json(results[0]);
+    } else {
+      console.log("Player not found for name:", playerName); // Debugging
+      res.status(404).send("Player not found");
+    }
+  });
 });
 
 module.exports = router;

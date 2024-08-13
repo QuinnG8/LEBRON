@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NBA Quiz Game - Player Positions</title>
-  <link rel="stylesheet" href="/reset.css" />
-  <link rel="stylesheet" href="/LEBRON.css" />
-</head>
-<body>
-  <%- include("partials/header") %>
-  <main>
-    <h2>Player Positions</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Position</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% player_positions.forEach(function(player_position) { %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Quiz Game - Player Positions</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/LEBRON.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <h2>Player Positions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Position</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% player_positions.forEach(function(player_position) { %>
           <tr>
             <td><%= player_position.player_name %></td>
             <td><%= player_position.position_name %></td>
-            <td><a href="/player_positions/edit/<%= player_position.playerPositionID %>" class="button edit-button">Edit</a></td>
             <td>
-              <form action="/player_positions/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this player position?');">
-                <input type="hidden" name="playerPositionID" value="<%= player_position.playerPositionID %>" />
-                <input type="submit" value="Delete" class="button delete-button" />
+              <a
+                href="/player_positions/edit/<%= player_position.playerPositionID %>"
+                class="button edit-button"
+                >Edit</a
+              >
+            </td>
+            <td>
+              <form
+                action="/player_positions/delete"
+                method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this player position?');"
+              >
+                <input
+                  type="hidden"
+                  name="playerPositionID"
+                  value="<%= player_position.playerPositionID %>"
+                />
+                <input
+                  type="submit"
+                  value="Delete"
+                  class="button delete-button"
+                />
               </form>
             </td>
           </tr>
-        <% }); %>
-      </tbody>
-    </table>
-    
-    <!-- Add Player Button -->
-    <a href="/player_positions/add" class="button add-button">Add Player Position</a>
-  </main>
-</body>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <!-- Add Player Button -->
+      <a href="/player_positions/add" class="button add-button"
+        >Add Player Position</a
+      >
+    </main>
+  </body>
 </html>
